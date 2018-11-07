@@ -15,7 +15,7 @@ CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 DEFINES       = -DQT_QML_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.11 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.11 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I. -isystem /usr/local/include -I../Hair/include -I/Users/daria/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/daria/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/daria/Qt/5.11.2/clang_64/mkspecs/macx-clang -F/Users/daria/Qt/5.11.2/clang_64/lib
+INCPATH       = -I. -I/usr/local/include -I../Hair/include -I/Users/daria/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/daria/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/daria/Qt/5.11.2/clang_64/mkspecs/macx-clang -F/Users/daria/Qt/5.11.2/clang_64/lib
 QMAKE         = /Users/daria/Qt/5.11.2/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -485,7 +485,28 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-main.o: main.cpp ../Hair/include/Hair.h \
+main.o: main.cpp /usr/local/include/gtest/gtest.h \
+		/usr/local/include/gtest/internal/gtest-internal.h \
+		/usr/local/include/gtest/internal/gtest-port.h \
+		/usr/local/include/gtest/internal/gtest-port-arch.h \
+		/usr/local/include/gtest/internal/custom/gtest-port.h \
+		/usr/local/include/gtest/gtest-message.h \
+		/usr/local/include/gtest/internal/gtest-filepath.h \
+		/usr/local/include/gtest/internal/gtest-string.h \
+		/usr/local/include/gtest/internal/gtest-type-util.h \
+		/usr/local/include/gtest/gtest-death-test.h \
+		/usr/local/include/gtest/internal/gtest-death-test-internal.h \
+		/usr/local/include/gtest/gtest-param-test.h \
+		/usr/local/include/gtest/internal/gtest-param-util.h \
+		/usr/local/include/gtest/internal/gtest-linked_ptr.h \
+		/usr/local/include/gtest/gtest-printers.h \
+		/usr/local/include/gtest/internal/custom/gtest-printers.h \
+		/usr/local/include/gtest/internal/gtest-param-util-generated.h \
+		/usr/local/include/gtest/gtest_prod.h \
+		/usr/local/include/gtest/gtest-test-part.h \
+		/usr/local/include/gtest/gtest-typed-test.h \
+		/usr/local/include/gtest/gtest_pred_impl.h \
+		../Hair/include/Hair.h \
 		../Hair/include/Strand.h \
 		../Hair/include/StrandPoint.h \
 		../Hair/include/Vector.h
