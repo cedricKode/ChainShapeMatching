@@ -12,8 +12,7 @@ void Strand::setStrandId(int _strandid)
 
 int Strand::getNumberOfPointInStrand()
 {
-    m_npointsinstrand = m_pointsInStrand.size();
-    return m_npointsinstrand;
+    return m_pointsInStrand.size();
 }
 
 std::vector<StrandPoint> Strand::getAllPointsInStrand() const

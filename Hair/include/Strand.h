@@ -25,7 +25,6 @@ private:
     std::vector<StrandPoint> m_pointsInStrand;
 
     int m_strandid;
-    int m_npointsinstrand = 0;
 };
 
 #endif

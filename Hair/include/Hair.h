@@ -68,8 +68,7 @@ public:
      // ---------END TEXTURE DATA------------
 
 private:
-    std::vector<StrandPoint> strandsInHair;
-    int m_nstrandsinhair = 0;
+    std::vector<Strand> m_strandsInHair;
 
     int m_numOfRow2D;
     int m_numOfColumns2D;

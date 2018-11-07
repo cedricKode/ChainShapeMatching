@@ -118,3 +118,11 @@ TEST(Strand, getNumOfPointsInStrand)
     EXPECT_EQ(n_p, 0);
 }
 
+// ----------- STRAND ------------
+
+TEST(Hair, getNumOfStrandsInHair)
+{
+    Hair h;
+    auto n_s = h.getNumberOfStrandsInHair();
+    EXPECT_EQ(n_s, 0);
+}
