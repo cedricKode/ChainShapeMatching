@@ -1,43 +1,59 @@
 #ifndef HAIR_H_
 #define HAIR_H_
 #include "Strand.h"
-//#include <Eigen/Jacobi>
-#include <iostream>
 
+// Eigen Library will be used later
+//#include <Eigen/Jacobi>
+
+#include <iostream>
+#include "ngl/Vec3.h"
+#include <cstring>
+
+// This will be used later
+#include "CollisionHairToHair.h"
+
+
+// Data Storage -- 3D Texture, where width, hight and depth are not pre-defined
+// Each cell (voxel) may store unknow number of points, so it was decided to
+// use array(vector) with dynamic size
+// Rows -> Collumns -> Depth
 typedef std::vector<StrandPoint*> listOfPoints;
-//         rows(x)   columns(y)   depth(z)
-typedef std::vector<std::vector<std::vector<listOfPoints>>> Texture3D;
-// in this realisation Vec4 == ' R G B A '
-typedef std::vector<std::vector<Vector4>> Texture2D;
+typedef std::unique_ptr<listOfPoints> Texture3D;
+
+// Data Storage -- 2D Texture, where width and hight are not pre-defined
+// PixelDepth == 4 (RGBA)
+// Rows -> Collumns
+typedef std::unique_ptr<float []> Texture2D;
+
 
 class Hair
 {
 public:
 
-    Hair()=default;
-    ~Hair()=default;
-    Hair(const Hair &)=default;
-    Hair(Hair &&)=default;
-    Hair & operator =(const Hair &)=default;
-    Hair & operator =(Hair &&)=default;
+    // ---------- HAIR INITIALIZING PART -----------------
 
-    std::vector<Strand> getAllStrandsInHair() const;
-    void addStrandsToTheHair(const Strand _strandtoadd);
+    Hair()=default;
+    Hair(const ngl::Vec3 &_headPosition, float _radiusOfHead,
+         size_t _numStrands);
+    Hair(const Hair &)=default;
+
     int getNumberOfStrandsInHair() const;
 
     void render() const;
+    // Main function for executing updation of all points position
+    void update();
 
-    // ---------BEGIN TEXTURE DATA------------
+    // ----------- HAIR TEXTURE DATA PART ----------------
 
-    // initially we do not know dimensions of Textures. It have to be calculated from
-    // number of all points (in all strands)
-    // So this stage must be called just after creation of all points
-    void set2DTextureDimensions(const int _nrow, const int _ncollumn);
-    // 3d texture represent uniform grid, so it may have another dimensions
-    // collision may be calulated just inside this "grid"
-    void set3DTextureDimension(const int _nrow, const int _ncollumn, const int _nlevel);
+    // This function is planning to be a creation of [0] matrixes, according to
+    // number of strands and number of points. We are not able to make matrixes in advance,
+    // because we do not know this values
+    void set2DTextures();
+    // This function is planning to be a creation of [0] matrix, according to
+    // head position. We are not able to make matrix in advance,
+    // because we do not know this value
+    void set3DTexture();
 
-    // Main data was made public
     Texture2D m_oldPositionTex; //1st
     Texture2D m_newPositionTex; // 2nd
     Texture2D m_oldVelocityTex;
@@ -49,33 +65,28 @@ public:
     Texture2D m_optimalRotation2RowTex; // 9th
     Texture2D m_optimalRotation3RowTex; // 10th
 
-    // in each "voxel" we will list of pointers to strandPoints
     Texture3D m_voxeledUniformGridTex;
 
-    // In this function will be implemented loop throught all voxels,
-    // checking if voxel is not emplty -> goint to collision class for points in observing voxel
-    // So Collision Library may have to be added later
-    void runThrough3DTexture();
+    // Next to functions are planning to be used in update() method
 
-    // In this function will be implemented loop throught all textures (1st and 2nd )
+    // In this function will be implemented loop throught 1st and 2nd textures
     // and setting data to 7th to 10th Textures
     // Because of this we need Eigen (SVL calculation will take place)
     void calculationOfOptiomalTranslationAndRotation();
 
-    // Other functions (for adding all info to widthIdStrandIdRestLengthTex etc) is still unknown
-    // I am not sure, do I need to add them or not
+    // In this function loop throught all voxels will be implemented.
+    // If voxel is not emplty -> go to collision class for points
+    // inside observing voxel
+    void runThrough3DTexture();
 
      // ---------END TEXTURE DATA------------
 
 private:
+
+    size_t m_numStrands = 0;
+    size_t m_numPointsInStrands = 0;
     std::vector<Strand> m_strandsInHair;
-
-    int m_numOfRow2D;
-    int m_numOfColumns2D;
-
-    int m_numOfRow3D;
-    int m_numOfColumns3D;
-    int m_numOfLevels3D;
+    ngl::Vec3 m_position;
 };
 
 #endif

@@ -1,21 +1,21 @@
 #include "StrandPoint.h"
 
-Vector3 StrandPoint::getPosition() const
+ngl::Vec3  StrandPoint::getPosition() const
 {
     return m_position;
 }
 
-void StrandPoint::setPosition(const Vector3 &_pos)
+void StrandPoint::setPosition(const ngl::Vec3  &_pos)
 {
     m_position = _pos;
 }
 
-Vector3 StrandPoint::getVelocity() const
+ngl::Vec3  StrandPoint::getVelocity() const
 {
     return m_velocity;
 }
 
-void StrandPoint::setVelocity(const Vector3 &_vel)
+void StrandPoint::setVelocity(const ngl::Vec3  &_vel)
 {
     m_velocity = _vel;
 }

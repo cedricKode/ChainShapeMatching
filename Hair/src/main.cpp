@@ -4,6 +4,5 @@
 int main()
 {
     std::cout << "Hair Main\n";
-    Hair p;
 
 }

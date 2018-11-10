@@ -19,8 +19,3 @@ std::vector<StrandPoint> Strand::getAllPointsInStrand() const
 {
     return m_pointsInStrand;
 }
-
-void Strand::addPointToTheStrand(const StrandPoint _pointtoadd)
-{
-    m_pointsInStrand.push_back(_pointtoadd);
-}

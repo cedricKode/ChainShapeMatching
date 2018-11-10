@@ -64,8 +64,7 @@ DIST          = ../.qmake.stash \
 		Hair.pro include/Hair.h \
 		include/Strand.h \
 		include/StrandPoint.h \
-		include/Collision.h \
-		include/Vector.h src/main.cpp \
+		include/Collision.h src/main.cpp \
 		src/Hair.cpp \
 		src/Strand.cpp \
 		src/StrandPoint.cpp \
@@ -451,7 +450,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/daria/Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents include/Hair.h include/Strand.h include/StrandPoint.h include/Collision.h include/Vector.h $(DISTDIR)/
+	$(COPY_FILE) --parents include/Hair.h include/Strand.h include/StrandPoint.h include/Collision.h $(DISTDIR)/
 	$(COPY_FILE) --parents src/main.cpp src/Hair.cpp src/Strand.cpp src/StrandPoint.cpp src/Collision.cpp $(DISTDIR)/
 
 
@@ -506,19 +505,184 @@ compiler_clean: compiler_moc_predefs_clean
 main.o: src/main.cpp include/Hair.h \
 		include/Strand.h \
 		include/StrandPoint.h \
-		include/Vector.h
+		/Users/daria/NGL/include/ngl/Vec3.h \
+		/Users/daria/NGL/include/ngl/Types.h \
+		/Users/daria/NGL/gl3w/gl3w.h \
+		/Users/daria/NGL/gl3w/glcorearb.h \
+		/Users/daria/NGL/include/ngl/fmt/format.h \
+		/Users/daria/NGL/include/ngl/fmt/format.cc \
+		/Users/daria/NGL/include/ngl/NGLMessage.h \
+		/Users/daria/NGL/include/ngl/MessageQueue/AbstractMessageConsumer.h \
+		/usr/local/include/glm/vec3.hpp \
+		/usr/local/include/glm/ext/vector_bool3.hpp \
+		/usr/local/include/glm/detail/type_vec3.hpp \
+		/usr/local/include/glm/detail/qualifier.hpp \
+		/usr/local/include/glm/detail/setup.hpp \
+		/usr/local/include/glm/simd/platform.h \
+		/usr/local/include/glm/detail/_swizzle.hpp \
+		/usr/local/include/glm/detail/_swizzle_func.hpp \
+		/usr/local/include/glm/detail/type_vec3.inl \
+		/usr/local/include/glm/detail/compute_vector_relational.hpp \
+		/usr/local/include/glm/ext/vector_bool3_precision.hpp \
+		/usr/local/include/glm/ext/vector_float3.hpp \
+		/usr/local/include/glm/ext/vector_float3_precision.hpp \
+		/usr/local/include/glm/ext/vector_double3.hpp \
+		/usr/local/include/glm/ext/vector_double3_precision.hpp \
+		/usr/local/include/glm/ext/vector_int3.hpp \
+		/usr/local/include/glm/ext/vector_int3_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint3.hpp \
+		/usr/local/include/glm/ext/vector_uint3_precision.hpp \
+		/Users/daria/NGL/include/ngl/Vec4.h \
+		/Users/daria/NGL/include/ngl/Vec2.h \
+		/usr/local/include/glm/vec2.hpp \
+		/usr/local/include/glm/ext/vector_bool2.hpp \
+		/usr/local/include/glm/detail/type_vec2.hpp \
+		/usr/local/include/glm/detail/type_vec2.inl \
+		/usr/local/include/glm/ext/vector_bool2_precision.hpp \
+		/usr/local/include/glm/ext/vector_float2.hpp \
+		/usr/local/include/glm/ext/vector_float2_precision.hpp \
+		/usr/local/include/glm/ext/vector_double2.hpp \
+		/usr/local/include/glm/ext/vector_double2_precision.hpp \
+		/usr/local/include/glm/ext/vector_int2.hpp \
+		/usr/local/include/glm/ext/vector_int2_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint2.hpp \
+		/usr/local/include/glm/ext/vector_uint2_precision.hpp \
+		/usr/local/include/glm/vec4.hpp \
+		/usr/local/include/glm/ext/vector_bool4.hpp \
+		/usr/local/include/glm/detail/type_vec4.hpp \
+		/usr/local/include/glm/detail/type_vec4.inl \
+		/usr/local/include/glm/detail/type_vec4_simd.inl \
+		/usr/local/include/glm/ext/vector_bool4_precision.hpp \
+		/usr/local/include/glm/ext/vector_float4.hpp \
+		/usr/local/include/glm/ext/vector_float4_precision.hpp \
+		/usr/local/include/glm/ext/vector_double4.hpp \
+		/usr/local/include/glm/ext/vector_double4_precision.hpp \
+		/usr/local/include/glm/ext/vector_int4.hpp \
+		/usr/local/include/glm/ext/vector_int4_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint4.hpp \
+		/usr/local/include/glm/ext/vector_uint4_precision.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
 
-Hair.o: src/Hair.cpp 
+Hair.o: src/Hair.cpp include/Hair.h \
+		include/Strand.h \
+		include/StrandPoint.h \
+		/Users/daria/NGL/include/ngl/Vec3.h \
+		/Users/daria/NGL/include/ngl/Types.h \
+		/Users/daria/NGL/gl3w/gl3w.h \
+		/Users/daria/NGL/gl3w/glcorearb.h \
+		/Users/daria/NGL/include/ngl/fmt/format.h \
+		/Users/daria/NGL/include/ngl/fmt/format.cc \
+		/Users/daria/NGL/include/ngl/NGLMessage.h \
+		/Users/daria/NGL/include/ngl/MessageQueue/AbstractMessageConsumer.h \
+		/usr/local/include/glm/vec3.hpp \
+		/usr/local/include/glm/ext/vector_bool3.hpp \
+		/usr/local/include/glm/detail/type_vec3.hpp \
+		/usr/local/include/glm/detail/qualifier.hpp \
+		/usr/local/include/glm/detail/setup.hpp \
+		/usr/local/include/glm/simd/platform.h \
+		/usr/local/include/glm/detail/_swizzle.hpp \
+		/usr/local/include/glm/detail/_swizzle_func.hpp \
+		/usr/local/include/glm/detail/type_vec3.inl \
+		/usr/local/include/glm/detail/compute_vector_relational.hpp \
+		/usr/local/include/glm/ext/vector_bool3_precision.hpp \
+		/usr/local/include/glm/ext/vector_float3.hpp \
+		/usr/local/include/glm/ext/vector_float3_precision.hpp \
+		/usr/local/include/glm/ext/vector_double3.hpp \
+		/usr/local/include/glm/ext/vector_double3_precision.hpp \
+		/usr/local/include/glm/ext/vector_int3.hpp \
+		/usr/local/include/glm/ext/vector_int3_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint3.hpp \
+		/usr/local/include/glm/ext/vector_uint3_precision.hpp \
+		/Users/daria/NGL/include/ngl/Vec4.h \
+		/Users/daria/NGL/include/ngl/Vec2.h \
+		/usr/local/include/glm/vec2.hpp \
+		/usr/local/include/glm/ext/vector_bool2.hpp \
+		/usr/local/include/glm/detail/type_vec2.hpp \
+		/usr/local/include/glm/detail/type_vec2.inl \
+		/usr/local/include/glm/ext/vector_bool2_precision.hpp \
+		/usr/local/include/glm/ext/vector_float2.hpp \
+		/usr/local/include/glm/ext/vector_float2_precision.hpp \
+		/usr/local/include/glm/ext/vector_double2.hpp \
+		/usr/local/include/glm/ext/vector_double2_precision.hpp \
+		/usr/local/include/glm/ext/vector_int2.hpp \
+		/usr/local/include/glm/ext/vector_int2_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint2.hpp \
+		/usr/local/include/glm/ext/vector_uint2_precision.hpp \
+		/usr/local/include/glm/vec4.hpp \
+		/usr/local/include/glm/ext/vector_bool4.hpp \
+		/usr/local/include/glm/detail/type_vec4.hpp \
+		/usr/local/include/glm/detail/type_vec4.inl \
+		/usr/local/include/glm/detail/type_vec4_simd.inl \
+		/usr/local/include/glm/ext/vector_bool4_precision.hpp \
+		/usr/local/include/glm/ext/vector_float4.hpp \
+		/usr/local/include/glm/ext/vector_float4_precision.hpp \
+		/usr/local/include/glm/ext/vector_double4.hpp \
+		/usr/local/include/glm/ext/vector_double4_precision.hpp \
+		/usr/local/include/glm/ext/vector_int4.hpp \
+		/usr/local/include/glm/ext/vector_int4_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint4.hpp \
+		/usr/local/include/glm/ext/vector_uint4_precision.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Hair.o src/Hair.cpp
 
 Strand.o: src/Strand.cpp include/Strand.h \
 		include/StrandPoint.h \
-		include/Vector.h
+		/Users/daria/NGL/include/ngl/Vec3.h \
+		/Users/daria/NGL/include/ngl/Types.h \
+		/Users/daria/NGL/gl3w/gl3w.h \
+		/Users/daria/NGL/gl3w/glcorearb.h \
+		/Users/daria/NGL/include/ngl/fmt/format.h \
+		/Users/daria/NGL/include/ngl/fmt/format.cc \
+		/Users/daria/NGL/include/ngl/NGLMessage.h \
+		/Users/daria/NGL/include/ngl/MessageQueue/AbstractMessageConsumer.h \
+		/usr/local/include/glm/vec3.hpp \
+		/usr/local/include/glm/ext/vector_bool3.hpp \
+		/usr/local/include/glm/detail/type_vec3.hpp \
+		/usr/local/include/glm/detail/qualifier.hpp \
+		/usr/local/include/glm/detail/setup.hpp \
+		/usr/local/include/glm/simd/platform.h \
+		/usr/local/include/glm/detail/_swizzle.hpp \
+		/usr/local/include/glm/detail/_swizzle_func.hpp \
+		/usr/local/include/glm/detail/type_vec3.inl \
+		/usr/local/include/glm/detail/compute_vector_relational.hpp \
+		/usr/local/include/glm/ext/vector_bool3_precision.hpp \
+		/usr/local/include/glm/ext/vector_float3.hpp \
+		/usr/local/include/glm/ext/vector_float3_precision.hpp \
+		/usr/local/include/glm/ext/vector_double3.hpp \
+		/usr/local/include/glm/ext/vector_double3_precision.hpp \
+		/usr/local/include/glm/ext/vector_int3.hpp \
+		/usr/local/include/glm/ext/vector_int3_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint3.hpp \
+		/usr/local/include/glm/ext/vector_uint3_precision.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Strand.o src/Strand.cpp
 
 StrandPoint.o: src/StrandPoint.cpp include/StrandPoint.h \
-		include/Vector.h
+		/Users/daria/NGL/include/ngl/Vec3.h \
+		/Users/daria/NGL/include/ngl/Types.h \
+		/Users/daria/NGL/gl3w/gl3w.h \
+		/Users/daria/NGL/gl3w/glcorearb.h \
+		/Users/daria/NGL/include/ngl/fmt/format.h \
+		/Users/daria/NGL/include/ngl/fmt/format.cc \
+		/Users/daria/NGL/include/ngl/NGLMessage.h \
+		/Users/daria/NGL/include/ngl/MessageQueue/AbstractMessageConsumer.h \
+		/usr/local/include/glm/vec3.hpp \
+		/usr/local/include/glm/ext/vector_bool3.hpp \
+		/usr/local/include/glm/detail/type_vec3.hpp \
+		/usr/local/include/glm/detail/qualifier.hpp \
+		/usr/local/include/glm/detail/setup.hpp \
+		/usr/local/include/glm/simd/platform.h \
+		/usr/local/include/glm/detail/_swizzle.hpp \
+		/usr/local/include/glm/detail/_swizzle_func.hpp \
+		/usr/local/include/glm/detail/type_vec3.inl \
+		/usr/local/include/glm/detail/compute_vector_relational.hpp \
+		/usr/local/include/glm/ext/vector_bool3_precision.hpp \
+		/usr/local/include/glm/ext/vector_float3.hpp \
+		/usr/local/include/glm/ext/vector_float3_precision.hpp \
+		/usr/local/include/glm/ext/vector_double3.hpp \
+		/usr/local/include/glm/ext/vector_double3_precision.hpp \
+		/usr/local/include/glm/ext/vector_int3.hpp \
+		/usr/local/include/glm/ext/vector_int3_precision.hpp \
+		/usr/local/include/glm/ext/vector_uint3.hpp \
+		/usr/local/include/glm/ext/vector_uint3_precision.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o StrandPoint.o src/StrandPoint.cpp
 
 Collision.o: src/Collision.cpp 

@@ -3,13 +3,12 @@ SOURCES += src/main.cpp \
            src/Hair.cpp \
            src/Strand.cpp \
            src/StrandPoint.cpp \
-           src/Collision.cpp
+    src/CollisionHairToHair.cpp
 
 HEADERS += include/Hair.h \
            include/Strand.h \
            include/StrandPoint.h \
-           include/Collision.h \
-           include/Vector.h
+    include/CollisionHairToHair.h
 
 INCLUDEPATH += ./include
 
