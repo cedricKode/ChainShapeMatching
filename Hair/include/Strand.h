@@ -7,12 +7,13 @@
 class Strand
 {
 public:
-
+    // Constructors
     Strand()=default;
     // Let's think, for begging, that each strand is a line;
     // So all points of strand are located on one line, with
     // fixed distance between points
-    Strand(ngl::Vec3 &_directionToPlacingPoints, size_t _numPoints, float _distance);
+    Strand(ngl::Vec3 &_rootPointPosition, ngl::Vec3 &_directionToPlacingPoints, size_t _numPoints, float _distance);
+
     ~Strand()=default;
     Strand(const Strand &)=default;
     Strand(Strand &&)=default;
@@ -30,6 +31,9 @@ public:
     // This method will update goalPosition -> method setGoalPosition from StrandPoint will
     // be used
     void preserveStretching();
+
+    // Output data for all points in strand
+    void render();
 
 private:
     std::vector<StrandPoint> m_pointsInStrand;

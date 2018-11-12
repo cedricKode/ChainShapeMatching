@@ -5,7 +5,10 @@
 class StrandPoint
 {
 public:
+    // Constructors
     StrandPoint()=default;
+    StrandPoint(ngl::Vec3 &_position, ngl::Vec3 &_velocity, float _mass, size_t _regionWidth);
+
     ~StrandPoint()=default;
     StrandPoint(const StrandPoint &)=default;
     StrandPoint(StrandPoint &&)=default;
@@ -23,12 +26,10 @@ public:
     void setVelocity(const ngl::Vec3  &vel);
 
     float getMass() const;
-    void setMass(float _mass);
 
     // Will be the same for all points inside one strand, so
     // may be this function will be deleted later
     float getRestLength() const;
-    void setRestLength(float _restlength);
 
     // Setting radius for calculationg collision
     float getRadius() const;
@@ -36,7 +37,6 @@ public:
 
     // Region of observing "neigbour" points of the same strand inside 2DTexture
     int getRegionWidth() const;
-    void setRegionWidth(int _w);
 
     int getPointId() const;
     void setPointId(int _pointid);
@@ -52,6 +52,9 @@ public:
     // Summing up all forces for one point, plus adding gravity
     void addGravityForce(ngl::Vec3 &_gravityForce);
     void updateExternalForces(ngl::Vec3 &_force);
+
+    // Output position of the point
+    void render();
 
 private:
 

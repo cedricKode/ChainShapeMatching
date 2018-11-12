@@ -3,6 +3,7 @@
 
 int main()
 {
-    std::cout << "Hair Main\n";
-
+    ngl::Vec3 headPosition(1, 2, 0);
+    Hair h(headPosition, 2.0f, 100);
+    h.render();
 }

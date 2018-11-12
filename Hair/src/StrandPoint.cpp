@@ -1,4 +1,13 @@
 #include "StrandPoint.h"
+#include <iostream>
+
+StrandPoint::StrandPoint(ngl::Vec3 &_position, ngl::Vec3 &_velocty, float _mass, size_t _regionWidth)
+{
+    m_velocity = _velocty;
+    m_position = _position;
+    m_mass = _mass;
+    m_w = _regionWidth;
+}
 
 ngl::Vec3  StrandPoint::getPosition() const
 {
@@ -25,19 +34,9 @@ float StrandPoint::getMass() const
     return m_mass;
 }
 
-void StrandPoint::setMass(float _mass)
-{
-    m_mass = _mass;
-}
-
 float StrandPoint::getRestLength() const
 {
     return m_restlength;
-}
-
-void StrandPoint::setRestLength(float _restlength)
-{
-    m_restlength = _restlength;
 }
 
 float StrandPoint::getRadius() const
@@ -52,10 +51,6 @@ void StrandPoint::setRadius(float _radius)
 int StrandPoint::getRegionWidth() const
 {
     return m_w;
-}
-void StrandPoint::setRegionWidth(int _w)
-{
-    m_w = _w;
 }
 
 int StrandPoint::getPointId() const
@@ -76,4 +71,9 @@ int StrandPoint::getNumberOfBelongedRegions() const
 void StrandPoint::updateNumberOfBelongedRegions()
 {
     m_nbelongedregions += 1;
+}
+
+void StrandPoint::render()
+{
+    std::cout << m_position.m_x << " " << m_position.m_y << " " << m_position.m_z << "\n";
 }

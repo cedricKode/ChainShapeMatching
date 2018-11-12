@@ -2,7 +2,6 @@
 #define HAIR_H_
 #include "Strand.h"
 
-// Eigen Library will be used later
 //#include <Eigen/Jacobi>
 
 #include <iostream>
@@ -37,7 +36,7 @@ public:
          size_t _numStrands);
     Hair(const Hair &)=default;
 
-    int getNumberOfStrandsInHair() const;
+    size_t getNumberOfStrandsInHair() const;
 
     void render() const;
     // Main function for executing updation of all points position
@@ -79,12 +78,15 @@ public:
     // inside observing voxel
     void runThrough3DTexture();
 
+    // Output data for all strands in hair simulation
+    void render();
+
      // ---------END TEXTURE DATA------------
 
 private:
 
     size_t m_numStrands = 0;
-    size_t m_numPointsInStrands = 0;
+
     std::vector<Strand> m_strandsInHair;
     ngl::Vec3 m_position;
 };

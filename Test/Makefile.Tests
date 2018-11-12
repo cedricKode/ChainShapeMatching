@@ -538,35 +538,7 @@ main.o: main.cpp /usr/local/include/gtest/gtest.h \
 		/usr/local/include/glm/ext/vector_int3_precision.hpp \
 		/usr/local/include/glm/ext/vector_uint3.hpp \
 		/usr/local/include/glm/ext/vector_uint3_precision.hpp \
-		/Users/daria/NGL/include/ngl/Vec4.h \
-		/Users/daria/NGL/include/ngl/Vec2.h \
-		/usr/local/include/glm/vec2.hpp \
-		/usr/local/include/glm/ext/vector_bool2.hpp \
-		/usr/local/include/glm/detail/type_vec2.hpp \
-		/usr/local/include/glm/detail/type_vec2.inl \
-		/usr/local/include/glm/ext/vector_bool2_precision.hpp \
-		/usr/local/include/glm/ext/vector_float2.hpp \
-		/usr/local/include/glm/ext/vector_float2_precision.hpp \
-		/usr/local/include/glm/ext/vector_double2.hpp \
-		/usr/local/include/glm/ext/vector_double2_precision.hpp \
-		/usr/local/include/glm/ext/vector_int2.hpp \
-		/usr/local/include/glm/ext/vector_int2_precision.hpp \
-		/usr/local/include/glm/ext/vector_uint2.hpp \
-		/usr/local/include/glm/ext/vector_uint2_precision.hpp \
-		/usr/local/include/glm/vec4.hpp \
-		/usr/local/include/glm/ext/vector_bool4.hpp \
-		/usr/local/include/glm/detail/type_vec4.hpp \
-		/usr/local/include/glm/detail/type_vec4.inl \
-		/usr/local/include/glm/detail/type_vec4_simd.inl \
-		/usr/local/include/glm/ext/vector_bool4_precision.hpp \
-		/usr/local/include/glm/ext/vector_float4.hpp \
-		/usr/local/include/glm/ext/vector_float4_precision.hpp \
-		/usr/local/include/glm/ext/vector_double4.hpp \
-		/usr/local/include/glm/ext/vector_double4_precision.hpp \
-		/usr/local/include/glm/ext/vector_int4.hpp \
-		/usr/local/include/glm/ext/vector_int4_precision.hpp \
-		/usr/local/include/glm/ext/vector_uint4.hpp \
-		/usr/local/include/glm/ext/vector_uint4_precision.hpp
+		../Hair/include/CollisionHairToHair.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 Hair.o: ../Hair/src/Hair.cpp ../Hair/include/Hair.h \
@@ -599,35 +571,7 @@ Hair.o: ../Hair/src/Hair.cpp ../Hair/include/Hair.h \
 		/usr/local/include/glm/ext/vector_int3_precision.hpp \
 		/usr/local/include/glm/ext/vector_uint3.hpp \
 		/usr/local/include/glm/ext/vector_uint3_precision.hpp \
-		/Users/daria/NGL/include/ngl/Vec4.h \
-		/Users/daria/NGL/include/ngl/Vec2.h \
-		/usr/local/include/glm/vec2.hpp \
-		/usr/local/include/glm/ext/vector_bool2.hpp \
-		/usr/local/include/glm/detail/type_vec2.hpp \
-		/usr/local/include/glm/detail/type_vec2.inl \
-		/usr/local/include/glm/ext/vector_bool2_precision.hpp \
-		/usr/local/include/glm/ext/vector_float2.hpp \
-		/usr/local/include/glm/ext/vector_float2_precision.hpp \
-		/usr/local/include/glm/ext/vector_double2.hpp \
-		/usr/local/include/glm/ext/vector_double2_precision.hpp \
-		/usr/local/include/glm/ext/vector_int2.hpp \
-		/usr/local/include/glm/ext/vector_int2_precision.hpp \
-		/usr/local/include/glm/ext/vector_uint2.hpp \
-		/usr/local/include/glm/ext/vector_uint2_precision.hpp \
-		/usr/local/include/glm/vec4.hpp \
-		/usr/local/include/glm/ext/vector_bool4.hpp \
-		/usr/local/include/glm/detail/type_vec4.hpp \
-		/usr/local/include/glm/detail/type_vec4.inl \
-		/usr/local/include/glm/detail/type_vec4_simd.inl \
-		/usr/local/include/glm/ext/vector_bool4_precision.hpp \
-		/usr/local/include/glm/ext/vector_float4.hpp \
-		/usr/local/include/glm/ext/vector_float4_precision.hpp \
-		/usr/local/include/glm/ext/vector_double4.hpp \
-		/usr/local/include/glm/ext/vector_double4_precision.hpp \
-		/usr/local/include/glm/ext/vector_int4.hpp \
-		/usr/local/include/glm/ext/vector_int4_precision.hpp \
-		/usr/local/include/glm/ext/vector_uint4.hpp \
-		/usr/local/include/glm/ext/vector_uint4_precision.hpp
+		../Hair/include/CollisionHairToHair.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Hair.o ../Hair/src/Hair.cpp
 
 Strand.o: ../Hair/src/Strand.cpp ../Hair/include/Strand.h \

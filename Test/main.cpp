@@ -39,28 +39,12 @@ TEST(StrandPoint, setVelocity)
     EXPECT_FLOAT_EQ(vel.m_z, 0.0f);
 }
 
-TEST(StrandPoint, setMass)
-{
-    StrandPoint p;
-    p.setMass(1.0f);
-    auto mass = p.getMass();
-    EXPECT_FLOAT_EQ(mass, 1.0f);
-}
-
 TEST(StrandPoint, setRadius)
 {
     StrandPoint p;
     p.setRadius(1.0f);
     auto radius = p.getRadius();
     EXPECT_FLOAT_EQ(radius, 1.0f);
-}
-
-TEST(StrandPoint, setRegionWidth)
-{
-    StrandPoint p;
-    p.setRegionWidth(3);
-    auto region = p.getRegionWidth();
-    EXPECT_EQ(region, 3);
 }
 
 TEST(StrandPoint, setPointId)
