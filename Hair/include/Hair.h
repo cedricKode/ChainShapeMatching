@@ -38,7 +38,6 @@ public:
 
     size_t getNumberOfStrandsInHair() const;
 
-    void render() const;
     // Main function for executing updation of all points position
     void update();
 
@@ -66,6 +65,8 @@ public:
 
     Texture3D m_voxeledUniformGridTex;
 
+    void setInitialPositionTex();
+
     // Next to functions are planning to be used in update() method
 
     // In this function will be implemented loop throught 1st and 2nd textures
@@ -82,6 +83,8 @@ public:
     void render();
 
      // ---------END TEXTURE DATA------------
+
+    bool checkCollisionOfAllPointsWithHead() const;
 
 private:
 

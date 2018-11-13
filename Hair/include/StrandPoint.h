@@ -45,13 +45,11 @@ public:
     int getNumberOfBelongedRegions() const;
     void updateNumberOfBelongedRegions();
 
-    bool checkCollisionWithHead() const;
-    // if collision exist -- calculate penaltyForce between head and point
-    ngl::Vec3 penaltyForcePointToHead();
-
     // Summing up all forces for one point, plus adding gravity
     void addGravityForce(ngl::Vec3 &_gravityForce);
-    void updateExternalForces(ngl::Vec3 &_force);
+    void addPenaltyForcePointToHead(ngl::Vec3 &_penaltyForce);
+
+    //void updateExternalForces(ngl::Vec3 &_force);
 
     // Output position of the point
     void render();
