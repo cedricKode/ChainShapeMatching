@@ -1,97 +1,177 @@
+//---------------------------------------------------------------------------------------
+/// @file Hair.h
+/// @brief This is the main class of hair simulation and all other classes inherit
+/// form this
+/// @author Daria Kozlova
+/// @version 1.0
+/// @date 15/01/19
+/// @class Hair
+//---------------------------------------------------------------------------------------
+
 #ifndef HAIR_H_
 #define HAIR_H_
-#include "Strand.h"
 
-//#include <Eigen/Jacobi>
-
-#include <iostream>
-#include "ngl/Vec3.h"
 #include <cstring>
 
-// This will be used later
-#include "CollisionHairToHair.h"
+#include <ngl/Vec3.h>
 
-
-// Data Storage -- 3D Texture, where width, hight and depth are not pre-defined
-// Each cell (voxel) may store unknow number of points, so it was decided to
-// use array(vector) with dynamic size
-// Rows -> Collumns -> Depth
-typedef std::vector<StrandPoint*> listOfPoints;
-typedef std::unique_ptr<listOfPoints> Texture3D;
-
-// Data Storage -- 2D Texture, where width and hight are not pre-defined
-// PixelDepth == 4 (RGBA)
-// Rows -> Collumns
-typedef std::unique_ptr<float []> Texture2D;
-
+#include "Strand.h"
 
 class Hair
 {
-public:
-
-    // ---------- HAIR INITIALIZING PART -----------------
+  public:
 
     Hair()=default;
+    //-----------------------------------------------------------------------------------
+    /// @brief ctor for Hair simulation class
+    /// @param _headPosition original position of the sphere root
+    /// @param _radiusOfHed radius of the sphere root
+    /// @param _numStrands number of strands in hair simulation
+    /// @param _halfRegionWidth integer odd number of half width of region of each point
+    //-----------------------------------------------------------------------------------
     Hair(const ngl::Vec3 &_headPosition, float _radiusOfHead,
-         size_t _numStrands);
+         size_t _numStrands, size_t _halfRegionWidth);
+    //-----------------------------------------------------------------------------------
     Hair(const Hair &)=default;
+    //-----------------------------------------------------------------------------------
+    /// @brief copy ctor for Hair simulation class
+    //-----------------------------------------------------------------------------------
+    Hair& operator =(Hair &other)
+    {
+        m_numStrands = other.m_numStrands;
+        m_strandsInHair = other.m_strandsInHair;
+        m_allPoints = other.m_allPoints;
+        m_position = other.m_position;
+        m_radiusOfHead = other.m_radiusOfHead;
+        return *this;
+    }
 
-    size_t getNumberOfStrandsInHair() const;
+    //-----------------------------------------------------------------------------------
+    /// @brief method to get total number of strands in Hair simulation
+    /// @return integer number of strands in Hair simulation
+    //-----------------------------------------------------------------------------------
+    size_t getNumberOfStrandsInHair() const;   
+    //-----------------------------------------------------------------------------------
+    /// @brief method to set total number of strands in Hair simulation
+    /// @param _numStrands integer number of strands in Hair simulation
+    //-----------------------------------------------------------------------------------
+    void setNumberOfStrandsInHair(size_t &_numStrands);
+    //-----------------------------------------------------------------------------------
+    /// @brief method to get position of the sphere root
+    /// @return vector of position of the head
+    //-----------------------------------------------------------------------------------
+    ngl::Vec3 getPosition() const;
+    //-----------------------------------------------------------------------------------
+    /// @brief method to set position of the sphere root
+    /// @param _pos vector of position of the head
+    //-----------------------------------------------------------------------------------
+    void setPosition(ngl::Vec3 _pos);
+    //-----------------------------------------------------------------------------------
+    /// @brief method to get radius of the sphere root
+    /// @return float value of radius of the head
+    //-----------------------------------------------------------------------------------
+    float getRadius() const;
+    //-----------------------------------------------------------------------------------
+    /// @brief method to set radius of the sphere root
+    /// @param _radius float value of radius of the head
+    //-----------------------------------------------------------------------------------
+    void setRadius(float &_radius);
 
-    // Main function for executing updation of all points position
-    void update();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to create number of strands with random number of points in it.
+    //-----------------------------------------------------------------------------------
+    void createStrands();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to calculate original centers of mass for all regions, which will
+    /// take part in Chain Shape Matching algorithm
+    //-----------------------------------------------------------------------------------
+    void originalCentersOfMass();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to calculate distance between point and the next point in the
+    /// initial step of simulation
+    //-----------------------------------------------------------------------------------
+    void restLength();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to set gravity force to Hair simulation
+    /// @param _gravity vector of gravity direction
+    //-----------------------------------------------------------------------------------
+    void setGravityForce(ngl::Vec3 &_gravity);
+    //-----------------------------------------------------------------------------------
+    /// @brief method to get gravity force in Hair simulation
+    /// @return vector of gravity direction
+    //-----------------------------------------------------------------------------------
+    ngl::Vec3 getGravityForce() const;
+    //-----------------------------------------------------------------------------------
+    /// @brief method to enable or disable self collision in Hair simulation
+    /// @param _selfCollisionToggle switcher to enable or disable self collision in
+    /// Hair simulation
+    //-----------------------------------------------------------------------------------
+    void setSelfCollision(bool _selfCollisionToggle);
+    //-----------------------------------------------------------------------------------
+    /// @brief method to set half region width for each point in Hair simulation
+    /// @param _halfRegionWidth odd integer number between 1 and 7
+    //-----------------------------------------------------------------------------------
+    void setHalfRegionWidth(size_t _halfRegionWidth);
 
-    // ----------- HAIR TEXTURE DATA PART ----------------
-
-    // This function is planning to be a creation of [0] matrixes, according to
-    // number of strands and number of points. We are not able to make matrixes in advance,
-    // because we do not know this values
-    void set2DTextures();
-    // This function is planning to be a creation of [0] matrix, according to
-    // head position. We are not able to make matrix in advance,
-    // because we do not know this value
-    void set3DTexture();
-
-    Texture2D m_oldPositionTex; //1st
-    Texture2D m_newPositionTex; // 2nd
-    Texture2D m_oldVelocityTex;
-    Texture2D m_newVelocityTex;
-    Texture2D m_widthIdStrandIdRestLengthTex;
-    Texture2D m_initialPositionTex;
-    Texture2D m_optimalTransformationTex; //7th
-    Texture2D m_optimalRotation1RowTex; // 8th
-    Texture2D m_optimalRotation2RowTex; // 9th
-    Texture2D m_optimalRotation3RowTex; // 10th
-
-    Texture3D m_voxeledUniformGridTex;
-
-    void setInitialPositionTex();
-
-    // Next to functions are planning to be used in update() method
-
-    // In this function will be implemented loop throught 1st and 2nd textures
-    // and setting data to 7th to 10th Textures
-    // Because of this we need Eigen (SVL calculation will take place)
-    void calculationOfOptiomalTranslationAndRotation();
-
-    // In this function loop throught all voxels will be implemented.
-    // If voxel is not emplty -> go to collision class for points
-    // inside observing voxel
-    void runThrough3DTexture();
-
-    // Output data for all strands in hair simulation
+    //-----------------------------------------------------------------------------------
+    /// @brief method to reset Hair Simulation
+    //-----------------------------------------------------------------------------------
+    void updateSimulation();
+    //-----------------------------------------------------------------------------------
+    /// @brief main function for updating all points' position
+    /// @param _timeStep delta time in Hair Simulation
+    //-----------------------------------------------------------------------------------
+    void update(float _timeStep);
+    //-----------------------------------------------------------------------------------
+    /// @brief method to print position of all points in all strands in Hair Simulation
+    //-----------------------------------------------------------------------------------
     void render();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to clear all vector parameters in Hair Simulation
+    //-----------------------------------------------------------------------------------
+    void clear();
 
-     // ---------END TEXTURE DATA------------
-
-    bool checkCollisionOfAllPointsWithHead() const;
+    //-----------------------------------------------------------------------------------
+    /// @brief vector of all strands in Hair Simulation
+    //-----------------------------------------------------------------------------------
+    std::vector<Strand> m_strandsInHair;
+    //-----------------------------------------------------------------------------------
+    /// @brief vector of all points in Hair Simulation
+    //-----------------------------------------------------------------------------------
+    std::vector<StrandPoint> m_allPoints;
+    //-----------------------------------------------------------------------------------
+    /// @brief vector of pointers to all points in Hair Simulation
+    //-----------------------------------------------------------------------------------
+    std::vector<StrandPoint *> m_allPointsToDraw;
 
 private:
 
+    //-----------------------------------------------------------------------------------
+    /// @brief total number of strands in Hair Simulation
+    //-----------------------------------------------------------------------------------
     size_t m_numStrands = 0;
 
-    std::vector<Strand> m_strandsInHair;
+    //-----------------------------------------------------------------------------------
+    /// @brief radius of the root sphere
+    //-----------------------------------------------------------------------------------
+    float m_radiusOfHead = 0;
+    //-----------------------------------------------------------------------------------
+    /// @brief position of the root sphere
+    //-----------------------------------------------------------------------------------
     ngl::Vec3 m_position;
+    //-----------------------------------------------------------------------------------
+    /// @brief switcher to enable or disable collision between strands
+    //-----------------------------------------------------------------------------------
+    bool m_enableSelfCollision = false;
+    //-----------------------------------------------------------------------------------
+    /// @brief size of the half region width of each point in hair simulation
+    //-----------------------------------------------------------------------------------
+    size_t m_halfRegionWidth = 3;
+
+    //-----------------------------------------------------------------------------------
+    /// @brief constant gravity force, which influence to all points in Hair simulation
+    //-----------------------------------------------------------------------------------
+    ngl::Vec3 m_gravity = {0.0f, -9.8f, 0.0f};
 };
 
 #endif

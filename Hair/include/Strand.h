@@ -1,18 +1,32 @@
+//---------------------------------------------------------------------------------------
+/// @file Strand.h
+/// @brief This class inherits from Hair class and inherits by StrandPoint class
+/// @author Daria Kozlova
+/// @version 1.0
+/// @date 15/01/19
+/// @class Strand
+//---------------------------------------------------------------------------------------
+
 #ifndef STRAND_H_
 #define STRAND_H_
-#include <vector>
-#include "StrandPoint.h"
+
 #include <cstring>
+#include <vector>
+
+#include "StrandPoint.h"
+
+class Hair;
 
 class Strand
 {
-public:
-    // Constructors
+  public:
+
     Strand()=default;
-    // Let's think, for begging, that each strand is a line;
-    // So all points of strand are located on one line, with
-    // fixed distance between points
-    Strand(ngl::Vec3 &_rootPointPosition, ngl::Vec3 &_directionToPlacingPoints, size_t _numPoints, float _distance);
+    //-----------------------------------------------------------------------------------
+    /// @brief ctor for one Strand
+    /// @param _hair reference to the whole Hair simulation
+    //-----------------------------------------------------------------------------------
+    Strand(Hair *_hair) : m_hair(_hair){}
 
     ~Strand()=default;
     Strand(const Strand &)=default;
@@ -20,27 +34,86 @@ public:
     Strand & operator =(const Strand &)=default;
     Strand & operator =(Strand &&)=default;
 
-    std::vector<StrandPoint> getAllPointsInStrand() const;
-    int getNumberOfPointInStrand();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to add reference of one point to the vector of all points, which
+    /// belong to observed strand
+    /// @param _p points to add to the vector
+    //-----------------------------------------------------------------------------------
+    void addPointToStrand(StrandPoint *_p) {m_pointsInStrandRef.push_back(_p);}
+    //-----------------------------------------------------------------------------------
+    /// @brief method to get the vector of all points, which belong to observed strand
+    /// @return vector of references to points, which belong to observed strand
+    //-----------------------------------------------------------------------------------
+    std::vector<StrandPoint *> getAllRefPointsInStrand() const;
+    //-----------------------------------------------------------------------------------
+    /// @brief method to get number of points, which belong to observed strand
+    /// @return integer number of points, which belong to observed strand
+    //-----------------------------------------------------------------------------------
+    size_t getNumberOfPointInStrand();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to get strand id number
+    /// @return integer number of strand id
+    //-----------------------------------------------------------------------------------
+    size_t getStrandId() const;
+    //-----------------------------------------------------------------------------------
+    /// @brief method to set strand id number
+    /// @param _strandid integer number of strand id
+    //-----------------------------------------------------------------------------------
+    void setStrandId(size_t _strandid);
 
-    int getStrandId() const;
-    void setStrandId(int _strandid);
+    //-----------------------------------------------------------------------------------
+    /// @brief method to calculate original centers of mass for all regions of points,
+    /// which belong to observed strand
+    //-----------------------------------------------------------------------------------
+    void originalCentersOfMass();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to calculate current centers of mass for all regions of points,
+    /// which belong to observed strand
+    //-----------------------------------------------------------------------------------
+    void currentCenterOfTheMass();
 
-    // this function will update points position according to their new goal position
-    // and rest length. Also, velocity may be needed to update.
-    // This method will update goalPosition -> method setGoalPosition from StrandPoint will
-    // be used
-    void preserveStretching();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to calculate optimal rotation and optimal translation between
+    /// old and current position for all regions of points, which belong to observed
+    /// strand
+    //-----------------------------------------------------------------------------------
+    void optimalTransformation();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to calculate goal position for all points which belong to observed
+    /// strand
+    //-----------------------------------------------------------------------------------
+    void goalPosition();
 
-    // Output data for all points in strand
+    //-----------------------------------------------------------------------------------
+    /// @brief method to preserve stretching of the goal positions of points in observed
+    /// strand
+    //-----------------------------------------------------------------------------------
+    void strainLimitingGoalPosition();
+    //-----------------------------------------------------------------------------------
+    /// @brief method to preserve stretching of the final positions of points in
+    /// observed strand
+    //-----------------------------------------------------------------------------------
+    void strainLimitingPosition();
+
+    //-----------------------------------------------------------------------------------
+    /// @brief method to print position of all points from observed strand
+    //-----------------------------------------------------------------------------------
     void render();
 
-private:
-    std::vector<StrandPoint> m_pointsInStrand;
-    size_t m_numPoints = 0;
+    //-----------------------------------------------------------------------------------
+    /// @brief reference to whole Hair simulation
+    //-----------------------------------------------------------------------------------
+    Hair *m_hair;
 
-    float m_distance;
-    int m_strandid;
+private:
+    //-----------------------------------------------------------------------------------
+    /// @brief vector of references to points, which belong to observed strand
+    //-----------------------------------------------------------------------------------
+    std::vector<StrandPoint *> m_pointsInStrandRef;
+    //-----------------------------------------------------------------------------------
+    /// @brief strand id number
+    //-----------------------------------------------------------------------------------
+    size_t m_strandid;
 };
 
 #endif

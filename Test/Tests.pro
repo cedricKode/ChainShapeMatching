@@ -7,6 +7,7 @@ SOURCES += main.cpp \
 CONFIG+=c++11
 
 INCLUDEPATH += /usr/local/include/
+INCLUDEPATH += /usr/local/include/eigen3
 
 LIBS += -L/usr/local/lib -lgtest
 

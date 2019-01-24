@@ -1,19 +1,19 @@
-CMakeCache.txt
-CMakeFiles
-cmake_install.cmake
-
-*.bmp
-
-
-# Prerequisites
-*.d
-
 # Compiled Object files
 *.slo
 *.lo
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
+# qt files
+*.pro.user*
+.qmake*
+moc/
+moc_*
+ui_*
+# shadow build directories
+build-*
+Makefile*
+CMakeLists.txt
+.DS_Store
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll

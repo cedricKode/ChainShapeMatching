@@ -1,7 +1,6 @@
 TEMPLATE=subdirs
-SUBDIRS+=Hair/Hair.pro
+SUBDIRS+=Hair/HairSimulation.pro
 SUBDIRS+=Test/Tests.pro
 
-cache()
 
 CONFIG-=app_bundle
